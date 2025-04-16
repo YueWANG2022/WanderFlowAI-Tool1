@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Travel Questionnaire</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f9f9f9; }
+    .card { background: white; padding: 2rem; border-radius: 12px; max-width: 600px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .question { margin-bottom: 1.5rem; }
+    .progress { margin-bottom: 1rem; font-weight: bold; color: #555; display: flex; justify-content: space-between; align-items: center; }
+    button { padding: 0.5rem 1rem; font-size: 1rem; border: none; background-color: #4f46e5; color: white; border-radius: 8px; cursor: pointer; margin-top: 1rem; }
+    .results { background: #e0f7fa; padding: 1rem; border-radius: 8px; margin-top: 2rem; }
+    .recommendations { background: #fff8e1; padding: 1rem; border-radius: 8px; margin-top: 1rem; }
+    .api-key-section { margin-bottom: 2rem; background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    .api-key-section input { width: 100%; padding: 8px; margin-top: 4px; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="api-key-section">
+      <h3>🔐 Enter your API Keys</h3>
+      <label>ORS API Key:
+        <input type="text" id="orsApiKey" placeholder="Paste ORS key" />
+      </label>
+      <label>Gemini API Key:
+        <input type="text" id="geminiApiKey" placeholder="Paste Gemini key" />
+      </label>
+      <label>OpenAI API Key:
+        <input type="text" id="openaiApiKey" placeholder="Paste OpenAI key" />
+      </label>
+    </div>
+
+    <div class="progress">
+      <div>Answer all questions below</div>
+      <button onclick="restartSurvey()">Restart</button>
+    </div>
+
+    <form id="questionnaire-form" onsubmit="submitAnswers(event)">
+      <div id="question-container"></div>
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="results" id="results" style="display: none;"></div>
+    <button onclick="submitRandomProfile()">🎲 Random Profile</button>
+    <button id="find-mate-button" style="display: none;" onclick="fetchRecommendations()">🔎 Find your travel mate</button>
+  </div>
+<script src="script.js"></script>
+</body>
+
+
+</html>
