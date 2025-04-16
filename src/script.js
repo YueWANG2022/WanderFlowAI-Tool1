@@ -121,19 +121,12 @@ function fetchRecommendations() {
   })
   .then(res => res.json())
   .then(data => {
-    const resultsDiv = document.getElementById("results");
-    const recDiv = document.createElement("div");
-    recDiv.className = "recommendations";
-    recDiv.innerHTML = `
-      <h4>🔍 Top Match Recommendations:</h4>
-      <ul>
-        ${data.recommendations.map(r =>
-          `<li><strong>User ${r.index + 1}</strong> (Score: ${r.score.toFixed(4)}): ${r.name}</li>`
-        ).join("")}
-      </ul>
-    `;
-    resultsDiv.appendChild(recDiv);
-    button.style.display = "none";
+    if (!data.recommendations) {
+      console.error("❌ Server responded with error:", data);
+      alert("Sorry, there was a problem finding matches. Please check your API key and try again.");
+      return;
+    }
+    // render recommendations...
   })
   .catch(err => {
     console.error("❌ Failed to fetch recommendations:", err);
