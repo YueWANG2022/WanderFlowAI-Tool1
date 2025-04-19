@@ -53,12 +53,20 @@ exports.handler = async (event) => {
       body: JSON.stringify({ recommendations: topMatches })
     };
   } catch (err) {
+    console.error("🔥 Error in /recommend handler 🔥");
+    console.error("Full error object:", err);
+    // Optional: handle known structure for axios errors
+    const errorDetails = err.response?.data || err.stack || err.toString();
+
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message })
+      body: JSON.stringify({
+        error: err.message || "Unknown error",
+        details: errorDetails
+      })
     };
-  }
-};
+}
+
 
 async function embedList(list, apiKey) {
   const response = await axios.post(
